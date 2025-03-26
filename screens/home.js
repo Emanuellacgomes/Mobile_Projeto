@@ -8,7 +8,6 @@ export default function Home(){
             <Text style={styles.texto1}>Passarela Delas</Text>
             <Text style={styles.texto2}>Compre Agora!</Text>
             <Text style={styles.texto4}>Frete Grátis!</Text>
-            
             <Image style={styles.img1} source={{uri:'https://th.bing.com/th/id/OIP.Zake99cZ-u6qLgz6p1bijgHaE7?w=303&h=202&c=7&r=0&o=5&pid=1.7'}}></Image>
             <Image style={styles.img2} source={{uri:'https://eudecoro.com.br/wp-content/uploads/2020/07/decoracao-loja-com-papel-de-parede-preto-celiabeatriz-103431-proportional-height_cover_medium.jpg'}}></Image>
             <Image style={styles.outraimg} source={{uri:'https://th.bing.com/th?id=OIP.MUaJmsq0ls5_CltevHh5zAHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'}}></Image>

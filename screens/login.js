@@ -3,14 +3,14 @@ import ImagemFundo from '../assets/degrade.jpg';
 
 const Separator = () => <View style={styles.separator} />;
 
-export default function Login() {
+export default function Login({navigation}) {
     return (
         <View style={styles.container}>
             <ImageBackground source={ImagemFundo} style={styles.imageBackground}>
                 <Text style={styles.texto1}>Login - Loja</Text>
                 <Separator />
                 <TextInput style={styles.input} placeholder="Senha" keyboardType="numeric" />
-                <Button style={styles.botao} title="Logar" />
+                <Button style={styles.botao} title="Logar" onPress={() => navigation.navigate('Home')} />
                 <Separator />
             </ImageBackground>
         </View>
@@ -20,12 +20,12 @@ export default function Login() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#faf',
     },
     imageBackground: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        resizeMode: 'contain',
     },
     botao: {},
     texto1: {
