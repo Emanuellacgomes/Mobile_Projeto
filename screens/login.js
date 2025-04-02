@@ -10,7 +10,7 @@ export default function Login({navigation}) {
                 <Text style={styles.texto1}>Login - Loja</Text>
                 <Separator />
                 <TextInput style={styles.input} placeholder="Senha" keyboardType="numeric" />
-                <Button style={styles.botao} title="Logar" onPress={() => navigation.navigate('Home')} />
+                <Button style={styles.botao} title="Logar" onPress={() => navigation.navigate('HomeTab')} />
                 <Separator />
             </ImageBackground>
         </View>
