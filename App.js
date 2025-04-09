@@ -1,5 +1,3 @@
-
-// Only import react-native-gesture-handler on native platforms
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -16,35 +14,31 @@ import Counter from './screens/counter';
 function BottomTabs(){
   const BottomTab = createBottomTabNavigator();
   return(
-    <BottomTab.Navigator screenOptions={{
+    <BottomTab.Navigator screenOptions={({ route }) => ({
       tabBarActiveTintColor: '#15BEFC',
       tabBarActiveBackgroundColor: '#A0E5FE',
       tabBarInactiveBackgroundColor: '#A0E5FE',
       headerStyle:{backgroundColor:'#A0E5FE'},
       headerTintColor:'#15BEFC',
-      headerTitleAlign:'center'
+      headerTitleAlign:'center',
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
 
-    }}>
-      <BottomTab.Screen name='Home' component={Home}
-      options={{
-        tabBarIcon: () => (
-          <MaterialCommunityIcons name="home" size={25} color="black"/>
-        )
-      }}></BottomTab.Screen>
-      <BottomTab.Screen name='Feed' component={Feed}
-      options={{
-        tabBarIcon: () => (
-          <FontAwesome name="feed" size={25} color="black" />
-        )
-      }}></BottomTab.Screen>
-
-      <BottomTab.Screen name='Counter' component={Counter}
-      options={{
-        tabBarIcon: () => (
-          <MaterialIcons name="numbers" size={24} color="black" />
-        )
-      }}>
-      </BottomTab.Screen>
+        if (route.name === 'Home') {
+          iconName = focused ? 'home' : 'home-outline';
+          return <MaterialCommunityIcons name={'home'} size={size} color={color} />;
+        } else if (route.name === 'Feed') {
+          iconName = focused ? 'rss' : 'rss-outline';
+          return <FontAwesome name={'feed'} size={size} color={color} />;
+        } else if (route.name === 'Counter') {
+          iconName = focused ? 'numbers' : 'numbers-outline';
+          return <MaterialIcons name={'feed'} size={size} color={color} />;
+        }
+      },
+    })}>
+      <BottomTab.Screen name='Home' component={Home}></BottomTab.Screen>
+      <BottomTab.Screen name='Feed' component={Feed}></BottomTab.Screen>
+      <BottomTab.Screen name='Counter' component={Counter}></BottomTab.Screen>
     </BottomTab.Navigator>
   )
 }

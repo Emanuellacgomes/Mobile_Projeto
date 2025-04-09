@@ -5,6 +5,8 @@ import { useState } from 'react';
 
 export default function Counter(){
     const [contador, setContador] = useState(0)
+    const [nome, setNome] = useState("")
+    const [email, setEmail] = useState("")
     function Aumentar(){
         setContador(contador + 1)
     }
@@ -44,9 +46,10 @@ export default function Counter(){
         /> */}
         </View>
         <View style={styles.viewInput}>
-            <TextInput style={styles.input} placeholder='Nome' placeholderTextColor={'#AB3BCD'}></TextInput>
-            <TextInput style={styles.input} placeholder='E-mail' placeholderTextColor={'#AB3BCD'}></TextInput>
+            <TextInput style={styles.input} placeholder='Nome' placeholderTextColor={'#AB3BCD'} value={nome} onChangeText={setNome}></TextInput>
+            <TextInput style={styles.input} placeholder='E-mail' placeholderTextColor={'#AB3BCD'} value={email} onChangeText={setEmail}></TextInput>
         </View>
+        <Text>Oi, {nome}, seu email é {email}</Text>
     </View>
     )
 }
