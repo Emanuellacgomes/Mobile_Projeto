@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,6 +11,7 @@ import Login from './screens/login';
 import Home from './screens/home';
 import Feed from './screens/feed';
 import Counter from './screens/counter';
+import Product from './screens/product';
 
 function BottomTabs(){
   const BottomTab = createBottomTabNavigator();
@@ -33,12 +35,16 @@ function BottomTabs(){
         } else if (route.name === 'Counter') {
           iconName = focused ? 'numbers' : 'numbers-outline';
           return <MaterialIcons name={'feed'} size={size} color={color} />;
+        } else if (route.name === 'Product') {
+          iconName = focused ? 'store' : 'store-outline';
+          return <FontAwesome5 name={'store'} size={size} color={color} />
         }
       },
     })}>
       <BottomTab.Screen name='Home' component={Home}></BottomTab.Screen>
       <BottomTab.Screen name='Feed' component={Feed}></BottomTab.Screen>
       <BottomTab.Screen name='Counter' component={Counter}></BottomTab.Screen>
+      <BottomTab.Screen name='Product' component={Product}></BottomTab.Screen>
     </BottomTab.Navigator>
   )
 }
