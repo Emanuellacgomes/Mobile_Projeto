@@ -1,21 +1,39 @@
 import { Text, View, StyleSheet, Button, ImageBackground, TextInput } from 'react-native';
 import {useState} from 'react';
+
+// Bibliotecas do Firebase
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../modules/Controller';
+
 import ImagemFundo from '../assets/degrade.jpg';
 
 const Separator = () => <View style={styles.separator} />;
 
 export default function Register({navigation}) {
-    
+
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
+
+const cadastroUser = () => {
+    createUserWithEmailAndPassword(auth,email,senha).then((userCredential) => {
+        console.log('Cadastrado com sucesso!', userCredential.user.email) //OBS: o cadastro so será efetuado se o email tiver esse parametro: email@gmail.com, a senha tambem deve ter no minímo 6 caracteres(se nao for verifique as configurações de politica de senha em authentication)
+        navigation.navigate('Login');
+      })
+      .catch((error) => {
+        console.log('Erro!',error.message);
+        // ..
+      });
+    
+}
     return (
         <View style={styles.container}>
             <ImageBackground source={ImagemFundo} style={styles.imageBackground}>
                 <Text style={styles.texto1}> Cadastro </Text>
                 <Separator />
                 <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail}/>
-                <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={setSenha} secureTextEntry={false}/>
-                <Button style={styles.botao} title="Cadastrar"  />
+                <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={setSenha} secureTextEntry={true}/>
+                <Button style={styles.botao} title="Cadastrar" onPress={cadastroUser}/>
+                <Separator />
                 <Button style={styles.botao} title="Logar" onPress={() => navigation.navigate('Login')} />
                 <Separator />
             </ImageBackground>

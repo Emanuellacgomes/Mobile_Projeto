@@ -12,6 +12,7 @@ import Home from './screens/home';
 import Feed from './screens/feed';
 import Counter from './screens/counter';
 import Product from './screens/product';
+import Register from './screens/Register';
 
 function BottomTabs(){
   const BottomTab = createBottomTabNavigator();
@@ -54,7 +55,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Login' component={Login}></Stack.Screen>
+        <Stack.Screen options={{headerShown:false}} name='Login' component={Login}></Stack.Screen>
+        <Stack.Screen options={{headerShown:false}} name='Cadastro' component={Register}></Stack.Screen>
         <Stack.Screen options={{headerShown:false}} name='HomeTab' component={BottomTabs}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
