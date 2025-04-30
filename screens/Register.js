@@ -1,22 +1,22 @@
 import { Text, View, StyleSheet, Button, ImageBackground, TextInput } from 'react-native';
+import {useState} from 'react';
 import ImagemFundo from '../assets/degrade.jpg';
 
 const Separator = () => <View style={styles.separator} />;
 
-export default function Login({navigation}) {
-
+export default function Register({navigation}) {
+    
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
-
     return (
         <View style={styles.container}>
             <ImageBackground source={ImagemFundo} style={styles.imageBackground}>
-                <Text style={styles.texto1}> Login </Text>
+                <Text style={styles.texto1}> Cadastro </Text>
                 <Separator />
                 <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail}/>
                 <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={setSenha} secureTextEntry={false}/>
-                <Button style={styles.botao} title="Entrar" onPress={() => navigation.navigate('HomeTab')} />
-                <Button style={styles.botao} title="Cadastre-se" onPress={() => navigation.navigate('Cadastro')} />
+                <Button style={styles.botao} title="Cadastrar"  />
+                <Button style={styles.botao} title="Logar" onPress={() => navigation.navigate('Login')} />
                 <Separator />
             </ImageBackground>
         </View>
