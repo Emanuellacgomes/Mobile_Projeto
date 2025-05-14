@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         resizeMode: 'contain',
+        width: '400px',
+        height: '-200px',
     },
     botao: {},
     texto1: {

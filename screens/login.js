@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button, ImageBackground, TextInput } from 'react-native';
+import { Text, View, StyleSheet, Button, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import {useState} from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../modules/Controller';
@@ -30,7 +30,10 @@ const VerificaUser = () => {
                 <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={setSenha} secureTextEntry={true}/>
                 <Button style={styles.botao} title="Entrar" onPress={VerificaUser} />
                 <Separator />
-                <Button style={styles.botao} title="Cadastre-se" onPress={() => navigation.navigate('Cadastro')} />
+                {/* <Button style={styles.botao} title="Cadastre-se" onPress={() => navigation.navigate('Cadastro')} /> */}
+                <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+                    <Text style={styles.txtcadast}>Cadastrar</Text>
+                </TouchableOpacity> 
                 <Separator />
             </ImageBackground>
         </View>
@@ -41,11 +44,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    txtcadast : {
+        fontSize: 20,
+        color: '#FFFFFF',
+    },
     imageBackground: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        resizeMode: 'contain',
+        width: '400px',
+        height: '-200px',
     },
     botao: {},
     texto1: {

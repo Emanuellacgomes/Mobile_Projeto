@@ -1,34 +1,31 @@
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
-import {useState} from 'react';
+import {View, Text, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
+import {useState, useEffect} from 'react';
 import Card from '../components/card';
-export default function Product(){
+import { firestore } from '../modules/Controller';
+import { collection, getDocs } from 'firebase/firestore';
 
-    const [produtos, setProdutos] = useState([
-        { 
-            id: 1,
-            nome: 'Camiseta',
-            valor: 9.99,
-            imagem: 'https://th.bing.com/th/id/R.c6efa119b40776c39f46153361dde96c?rik=SH5vtGBnQgz3TA&pid=ImgRaw&r=0', 
-        },
-        {
-            id: 2,
-            nome: 'Moletom',
-            valor: 159.99,
-            imagem: 'https://http2.mlstatic.com/D_NQ_NP_820407-MLB80062120741_102024-O-moletom-liso-algodo-unissex-blusa-de-frio-canguru-flanelado.webp',
-        },
-        {
-            id: 3,
-            nome: 'Tênis',
-            valor: 89.90,
-            imagem: 'https://th.bing.com/th/id/OIP.Eh4L8s36pW22FU-GHtRcVAHaHa?w=218&h=218&c=7&r=0&o=5&pid=1.7',
-        },
-        {
-            id: 4,
-            nome: 'Calça',
-            valor: 250.00,
-            imagem: 'https://img.irroba.com.br/fit-in/600x600/filters:fill(transparent):quality(80)/salomaoc/catalog/teste/roupas/calcas/novo-fem/calca-a-1-220176.png',
-        },
-    ])
+const Separator = () => <View style={styles.separator} />;
+
+export default function Product({navigation}){
+
+    const [produtos, setProdutos] = useState([]);
+
+    useEffect(() => {
+        async function carregarProdutos() {
+          try {
+            const querySnapshot = await getDocs(collection (firestore, 'produtos'));
+            const lista = [];
+            querySnapshot.forEach((doc) => {
+                lista.push({id: doc.id, ...doc.data()});
+            });
+            setProdutos(lista);
+          } catch (error) {
+            console.log("Erro ao buscar produtos:", error);
+          }
+        }
+
+        carregarProdutos();
+    }, []);
 
     return(
         <View style={styles.container}>
@@ -51,6 +48,10 @@ export default function Product(){
                 )}
                 keyExtractor={item => item.id} //basicamente diz que o 'id' é a chave primária
             />
+            <Separator />
+            <TouchableOpacity onPress={() => navigation.navigate('Cadastrar Produtos')}>
+                <Text style={styles.txtcadast}>Cadastrar Produtos Aqui!!!</Text>
+            </TouchableOpacity> 
         </View>
     )
 }
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#AC8',
         justifyContent: 'center',
+        
     },
     text:{
         color: '#FFFFFF',
@@ -70,6 +72,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
     },
+    txtcadast : {
+        fontSize: 20,
+        color: '#FFFFFF',
+        position: 'relative',
+        left: '500px',
+    },
     card:{
         alignItems: 'center',
         padding: 15,
@@ -79,6 +87,9 @@ const styles = StyleSheet.create({
         width: '350px',
         height: '100px',
         flexDirection: 'row',
+    },
+    separator: {
+        marginVertical: 20,
     },
     img:{
         height: '30px',
