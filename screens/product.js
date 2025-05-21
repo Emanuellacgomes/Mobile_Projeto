@@ -50,7 +50,7 @@ export default function Product({navigation}){
             />
             <Separator />
             <TouchableOpacity onPress={() => navigation.navigate('Cadastrar Produtos')}>
-                <Text style={styles.txtcadast}>Cadastrar Produtos Aqui!!!</Text>
+                <Text style={styles.text}>Cadastrar Produtos Aqui!!!</Text>
             </TouchableOpacity> 
         </View>
     )
