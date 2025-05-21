@@ -1,14 +1,16 @@
 import {View, Text, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, use} from 'react';
 import Card from '../components/card';
 import { firestore } from '../modules/Controller';
 import { collection, getDocs } from 'firebase/firestore';
+import { useCarrinho } from '../components/ProviderCart';
 
 const Separator = () => <View style={styles.separator} />;
 
 export default function Product({navigation}){
 
     const [produtos, setProdutos] = useState([]);
+    const {adicionarProduto} = useCarrinho();
 
     useEffect(() => {
         async function carregarProdutos() {
@@ -44,14 +46,15 @@ export default function Product({navigation}){
                         nome={item.nome}
                         valor={item.valor}
                         imagem={item.imagem}
+                        comprar={() => {
+                            adicionarProduto(item);
+                            navigation.navigate('Carrinho');
+                        }}
                     />
                 )}
                 keyExtractor={item => item.id} //basicamente diz que o 'id' é a chave primária
             />
             <Separator />
-            <TouchableOpacity onPress={() => navigation.navigate('Cadastrar Produtos')}>
-                <Text style={styles.text}>Cadastrar Produtos Aqui!!!</Text>
-            </TouchableOpacity> 
         </View>
     )
 }
@@ -70,7 +73,10 @@ const styles = StyleSheet.create({
     },
     txtprod:{
         fontSize: 20,
-        textAlign: 'center',
+        textAlign: 'right',
+        position: 'relative',
+        bottom: '55px',
+        right: '-75px',
     },
     txtcadast : {
         fontSize: 20,
@@ -92,9 +98,12 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     img:{
-        height: '30px',
-        width: '30px',
+        height: '70px',
+        width: '70px',
         backgroundColor: '#FAD',
         borderRadius: 5,
+        position: 'relative',
+        left: '-135px',
+        bottom: '0px',
     }
 })

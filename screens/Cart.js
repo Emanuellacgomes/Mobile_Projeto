@@ -1,12 +1,24 @@
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import { useCarrinho } from '../components/ProviderCart';
 
-export default function Card({nome, valor, imagem,comprar}){
+export default function Cart({navigation}){
+    const {carrinho} = useCarrinho();
     return(
-        <View style={styles.card}>
-            <Image style={styles.img} source={{uri: imagem}}/>
-            <Text style={styles.txtprod}>{nome}</Text>
-            <Text style={styles.txtprod}> R$: {valor}</Text>
-            <Button color={'#2fff24'} title='Comprar' onPress={comprar}/>
+        <View style={styles.container}>
+            <Text style={styles.text}>Carrinho</Text>
+            <FlatList
+            data={carrinho}
+            renderItem={({item}) => (
+                <View style={styles.card}>
+                    <Image style={styles.img} source={{uri: item.imagem}} />
+                    <Text style={styles.txtprod}>{item.nome}
+                    </Text>
+                    <Text style={styles.txtprod}>R$ {item.valor}</Text>
+                </View>
+            
+            )}
+            />
         </View>
     )
 }
@@ -37,7 +49,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         width: '350px',
         height: '100px',
-        flexDirection: 'column',
     },
     button:{
         color: '#2fff24'
